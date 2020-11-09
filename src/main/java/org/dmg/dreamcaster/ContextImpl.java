@@ -13,18 +13,22 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ContextImpl implements Context {
     private final List<Formula> formulas;
+    private final List<Supplier<Activation>> activations;
 
-    private Map<String, Formula> mapped;
+    private Map<String, Formula> mFormulas;
+    private Map<String, Supplier<Activation>> mActivations;
 
     @PostConstruct
     private void init() {
-        mapped = formulas.stream().collect(Collectors.toMap(Formula::getName, identity()));
+        mFormulas = formulas.stream().collect(Collectors.toMap(Formula::getName, identity()));
+        mActivations = activations.stream().collect(Collectors.toMap(f -> f.get().getName(), identity()));
     }
 
     @Override
@@ -34,11 +38,11 @@ public class ContextImpl implements Context {
 
     @Override
     public Activation createActivation(String name) {
-        return null;
+        return mActivations.get(name).get();
     }
 
     @Override
     public Function<int[], Integer> formula(String name) {
-        return mapped.get(name);
+        return mFormulas.get(name);
     }
 }

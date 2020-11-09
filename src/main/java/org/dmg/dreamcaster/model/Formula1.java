@@ -3,8 +3,6 @@ package org.dmg.dreamcaster.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.function.Function;
-
 @AllArgsConstructor
 public class Formula1 implements Formula {
     @Getter
