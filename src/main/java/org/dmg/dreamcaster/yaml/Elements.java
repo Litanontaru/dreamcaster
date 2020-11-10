@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Base {
+public class Elements {
     private List<Aspect> aspects;
     private List<Effect> effects;
 }
