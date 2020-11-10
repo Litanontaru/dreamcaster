@@ -10,6 +10,7 @@ import org.dmg.dreamcaster.model.Effect;
 import org.dmg.dreamcaster.model.Power;
 import org.dmg.dreamcaster.service.ActivationLocator;
 import org.dmg.dreamcaster.service.EffectLocator;
+import org.dmg.dreamcaster.service.PowerManager;
 import org.dmg.dreamcaster.service.PowerStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -27,6 +28,7 @@ import java.util.List;
 public class CreationController {
     private final EffectLocator effectLocator;
     private final ActivationLocator activationLocator;
+    private final PowerManager powerManager;
     private final PowerStore powerStore;
 
     @RequestMapping("/powers/simple/add")
@@ -52,6 +54,7 @@ public class CreationController {
         Power power = new Power();
         power.setKey(key);
         power.setEffect(effectLocator.create(key));
+        powerManager.rate(power);
         powerStore.save(power);
 
         power.add(linkTo(methodOn(CreationController.class).viewActivationsToAddToPower(power.getId())).withRel("Добавить активацию"));
@@ -102,6 +105,7 @@ public class CreationController {
         activation.add(linkTo(methodOn(CreationController.class).removeActivation(power_id, activations.size())).withRel("Удалить активацию"));
 
         activations.add(activation);
+        powerManager.rate(power);
         powerStore.save(power);
 
         return new ResponseEntity<>(power, HttpStatus.OK);
@@ -122,6 +126,7 @@ public class CreationController {
             activation.add(linkTo(methodOn(CreationController.class).removeActivation(power_id, i)).withRel("Удалить активацию"));
         }
 
+        powerManager.rate(power);
         powerStore.save(power);
 
         return new ResponseEntity<>(power, HttpStatus.OK);

@@ -15,6 +15,6 @@ public class Effect extends RepresentationModel<Effect> {
     private String description;
     private Map<String, Object> params;
 
-    private Integer rate;
-    private Double multiplier;
+    private Integer rate = 0;
+    private Double multiplier = 1.0;
 }

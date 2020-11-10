@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,10 +18,10 @@ public class Power extends RepresentationModel<Power> {
     private String key;
     private Map<String, Object> params;
 
-    private Integer rate;
-    private Double multiplier;
+    private Integer rate = 0;
+    private Double multiplier = 1.0;
 
     private Effect effect;
-    private List<Activation> activations;
+    private List<Activation> activations = new ArrayList<>();
     private List<Power> children;
 }
