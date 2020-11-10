@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @NoArgsConstructor
@@ -13,7 +14,7 @@ import java.util.Map;
 public class Effect extends RepresentationModel<Effect> {
     private String key;
     private String description;
-    private Map<String, Object> params;
+    private Map<String, Object> params = new HashMap<>();
 
     private Integer rate = 0;
     private Double multiplier = 1.0;

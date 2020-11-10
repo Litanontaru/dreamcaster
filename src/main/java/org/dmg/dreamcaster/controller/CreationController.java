@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.dmg.dreamcaster.model.Activation;
 import org.dmg.dreamcaster.model.CreationStart;
 import org.dmg.dreamcaster.model.Effect;
+import org.dmg.dreamcaster.model.Param;
+import org.dmg.dreamcaster.model.ParamList;
 import org.dmg.dreamcaster.model.Power;
 import org.dmg.dreamcaster.service.ActivationLocator;
 import org.dmg.dreamcaster.service.EffectLocator;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -53,11 +56,15 @@ public class CreationController {
 
         Power power = new Power();
         power.setKey(key);
-        power.setEffect(effectLocator.create(key));
+        Effect effect = effectLocator.create(key);
+
+        power.setEffect(effect);
         powerManager.rate(power);
         powerStore.save(power);
 
         power.add(linkTo(methodOn(CreationController.class).viewActivationsToAddToPower(power.getId())).withRel("Добавить активацию"));
+        power.add(linkTo(methodOn(CreationController.class).viewParams(power.getId())).withRel("Параметры"));
+        power.add(linkTo(methodOn(CreationController.class).viewEffectParams(power.getId())).withRel("Параметры Эффекта"));
 
         return new ResponseEntity<>(power, HttpStatus.OK);
     }
@@ -125,6 +132,94 @@ public class CreationController {
             activation.removeLinks();
             activation.add(linkTo(methodOn(CreationController.class).removeActivation(power_id, i)).withRel("Удалить активацию"));
         }
+
+        powerManager.rate(power);
+        powerStore.save(power);
+
+        return new ResponseEntity<>(power, HttpStatus.OK);
+    }
+
+    @RequestMapping("/powers/{power_id}/params")
+    public HttpEntity<ParamList> viewParams(
+        @PathVariable(value = "power_id") Long power_id
+    ) {
+        Power power = powerStore.get(power_id);
+        List<Param> params = power.getParams().entrySet().stream()
+                .map(e -> new Param(e.getKey(), e.getValue()))
+                .collect(Collectors.toList());
+        for (Param param : params) {
+            if (param.getValue() instanceof Integer) {
+                param.add(linkTo(methodOn(CreationController.class).increaseParam(power_id, param.getName())).withRel("Увеличить"));
+                param.add(linkTo(methodOn(CreationController.class).decreaseParam(power_id, param.getName())).withRel("Уменьшить"));
+            }
+        }
+
+        ParamList paramList = new ParamList(params);
+        paramList.add(linkTo(methodOn(CreationController.class).viewPower(power_id)).withRel("Назад"));
+        return new ResponseEntity<>(paramList, HttpStatus.OK);
+    }
+
+    @RequestMapping("/powers/{power_id}/params/{name}/increase")
+    public HttpEntity<Power> increaseParam(@PathVariable("power_id") Long power_id, @PathVariable("name") String name) {
+        Power power = powerStore.get(power_id);
+        Integer v = (Integer) power.getParams().get(name);
+        power.getParams().put(name, v + 1);
+
+        powerManager.rate(power);
+        powerStore.save(power);
+
+        return new ResponseEntity<>(power, HttpStatus.OK);
+    }
+
+    @RequestMapping("/powers/{power_id}/params/{name}/decrease")
+    public HttpEntity<Power> decreaseParam(@PathVariable("power_id") Long power_id, @PathVariable("name") String name) {
+        Power power = powerStore.get(power_id);
+        Integer v = (Integer) power.getParams().get(name);
+        power.getParams().put(name, v - 1);
+
+        powerManager.rate(power);
+        powerStore.save(power);
+
+        return new ResponseEntity<>(power, HttpStatus.OK);
+    }
+
+    @RequestMapping("/powers/{power_id}/effect/params")
+    public HttpEntity<ParamList> viewEffectParams(
+            @PathVariable(value = "power_id") Long power_id
+    ) {
+        Power power = powerStore.get(power_id);
+        List<Param> params = power.getEffect().getParams().entrySet().stream()
+                .map(e -> new Param(e.getKey(), e.getValue()))
+                .collect(Collectors.toList());
+        for (Param param : params) {
+            if (param.getValue() instanceof Integer) {
+                param.add(linkTo(methodOn(CreationController.class).increaseEffectParam(power_id, param.getName())).withRel("Увеличить"));
+                param.add(linkTo(methodOn(CreationController.class).decreaseEffectParam(power_id, param.getName())).withRel("Уменьшить"));
+            }
+        }
+
+        ParamList paramList = new ParamList(params);
+        paramList.add(linkTo(methodOn(CreationController.class).viewPower(power_id)).withRel("Назад"));
+        return new ResponseEntity<>(paramList, HttpStatus.OK);
+    }
+
+    @RequestMapping("/powers/{power_id}/effect/params/{name}/increase")
+    public HttpEntity<Power> increaseEffectParam(@PathVariable("power_id") Long power_id, @PathVariable("name") String name) {
+        Power power = powerStore.get(power_id);
+        Integer v = (Integer) power.getEffect().getParams().get(name);
+        power.getEffect().getParams().put(name, v + 1);
+
+        powerManager.rate(power);
+        powerStore.save(power);
+
+        return new ResponseEntity<>(power, HttpStatus.OK);
+    }
+
+    @RequestMapping("/powers/{power_id}/effect/params/{name}/decrease")
+    public HttpEntity<Power> decreaseEffectParam(@PathVariable("power_id") Long power_id, @PathVariable("name") String name) {
+        Power power = powerStore.get(power_id);
+        Integer v = (Integer) power.getEffect().getParams().get(name);
+        power.getEffect().getParams().put(name, v - 1);
 
         powerManager.rate(power);
         powerStore.save(power);

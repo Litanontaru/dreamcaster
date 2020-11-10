@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ import java.util.Map;
 public class Power extends RepresentationModel<Power> {
     private Long id;
     private String key;
-    private Map<String, Object> params;
+    private Map<String, Object> params = new HashMap<>();
 
     private Integer rate = 0;
     private Double multiplier = 1.0;
