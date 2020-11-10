@@ -1,0 +1,7 @@
+powers:
+  - effect:
+      damage_health: [4, 2]
+    activation:
+      reserve_time: 1
+      reserve_action:
+      pay wear: 1

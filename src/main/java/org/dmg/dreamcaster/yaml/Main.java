@@ -13,5 +13,12 @@ public class Main {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+        try (InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("examples/powers.yml")) {
+            PowerList powers = yaml.loadAs(inputStream, PowerList.class);
+            System.out.println();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

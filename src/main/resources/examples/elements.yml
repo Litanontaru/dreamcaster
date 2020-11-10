@@ -25,7 +25,7 @@ effects:
     base: 6
     params:
       N: N
-  - name: stun
+  - name: stun instant
     base: 8
   - name: damage_health instant
     base: 0
