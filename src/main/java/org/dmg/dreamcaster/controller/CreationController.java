@@ -59,17 +59,36 @@ public class CreationController {
         return new ResponseEntity<>(power, HttpStatus.OK);
     }
 
+    @RequestMapping("/powers/{power_id}")
+    public HttpEntity<Power> viewPower(@PathVariable(value = "power_id") Long power_id) {
+        Power power = powerStore.get(power_id);
+        return new ResponseEntity<>(power, HttpStatus.OK);
+    }
+
     @RequestMapping("/powers/{power_id}/activations/add")
     public HttpEntity<CreationStart> viewActivationsToAddToPower(@PathVariable(value = "power_id") Long power_id) {
         CreationStart start = new CreationStart();
         for (String key : activationLocator.activations()) {
-            start.add(linkTo(methodOn(CreationController.class).viewActivationsToAddToPower(power_id, key)).withRel(key));
+            start.add(linkTo(methodOn(CreationController.class).viewAddingActivationToPower(power_id, key)).withRel(key));
         }
+        start.add(linkTo(methodOn(CreationController.class).viewPower(power_id)).withRel("Назад"));
         return new ResponseEntity<>(start, HttpStatus.OK);
     }
 
+    @RequestMapping("/powers/{power_id}/activations/view/{key}")
+    public HttpEntity<Activation> viewAddingActivationToPower(
+            @PathVariable(value = "power_id") Long power_id,
+            @PathVariable(value = "key") String key
+    ) {
+        Activation activation = activationLocator.create(key);
+        activation.add(linkTo(methodOn(CreationController.class).addActivationToPower(power_id, key)).withRel("Добавить активацию"));
+        activation.add(linkTo(methodOn(CreationController.class).viewActivationsToAddToPower(power_id)).withRel("Назад"));
+
+        return new ResponseEntity<>(activation, HttpStatus.OK);
+    }
+
     @RequestMapping("/powers/{power_id}/activations/add/{key}")
-    public HttpEntity<Power> viewActivationsToAddToPower(
+    public HttpEntity<Power> addActivationToPower(
             @PathVariable(value = "power_id") Long power_id,
             @PathVariable(value = "key") String key
     ) {
