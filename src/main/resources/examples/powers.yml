@@ -2,6 +2,13 @@ powers:
   - effect:
       damage_health: [4, 2]
     activation:
-      reserve_time: 1
+      reserve_time: 1мг
       reserve_action:
-      pay wear: 1
+      pay_wear: 1
+  - effect:
+      damage_health_by_time: [3, 0, 3]
+      effect_duration: 1мин
+    activation:
+      reserve_time: 1мг
+      reserve_action:
+      pay_wear: 4

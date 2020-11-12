@@ -1,4 +1,4 @@
-package org.dmg.dreamcaster.yaml;
+package org.dmg.dreamcaster.editor.yaml;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +11,9 @@ import java.util.Map;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Aspect {
+public class YElement {
     private String name;
     private Double multiply;
     private Integer base;
-    private Map<String, Integer> options;
+    private Map<String, Number> options;
 }

@@ -1,4 +1,4 @@
-package org.dmg.dreamcaster.yaml;
+package org.dmg.dreamcaster.editor.yaml;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,5 +12,5 @@ import java.util.List;
 @Getter
 @Setter
 public class PowerList {
-    private List<Power> powers;
+    private List<YPower> powers;
 }

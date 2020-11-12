@@ -1,10 +1,14 @@
-aspects:
+elements:
   - name: N
     multiply: 2
   - name: N3
     multiply: 3
   - name: N4
     multiply: 4
+  - name: N8
+    multiply: 8
+  - name: N10
+    multiply: 10
   - name: by_time
     options:
       "1": 7
@@ -18,7 +22,107 @@ aspects:
       "4-6": 1
       "7-9": 2
 
-effects:
+aspects:
+  #== ACTIVATION PAY ==
+  - name: pay_wear
+    params:
+      X: N
+  - name: pay_contuse
+    base: 6
+  - name: pay_injure
+    params:
+      X: N4
+  - name: pay_traumatize_mind
+    params:
+      X: N4
+  - name: pay_one_personality
+    base: 4
+  - name: pay_burn_one_personality
+    base: 16
+  - name: pay_4_experience_points
+    base: 8
+  - name: pay_get_hindrance
+    base: 8
+  - name: pay_get_disorder
+    params:
+      X: N6
+  - name: pay_get_karma
+    params:
+      X: N4
+  - name: pay_crew_karma
+    params:
+      X: N3
+  - name: pay_reputation
+    params:
+      X: N3
+  - name: pay_hoard
+    params:
+      X: N3
+  - name: pay_purchase
+    params:
+      X: N
+  - name: pay_corruption
+    params:
+      X: N10
+  - name: pay_activity
+    base: 5
+    params:
+      X: N
+  - name: pay_personal_project
+    base: 5
+    params:
+      X: N1
+  - name: pay_fraction_relationship
+    params:
+      X: N
+  - name: pay_reduce_hold
+    base: 12
+
+  #== ACTIVATION TEST ==
+  - name: make_test
+    params:
+      T: I3
+
+  #== ACTIVATION EVENT ==
+  - name: when_take_a_health_damage
+    base: 2
+  - name: when_take_a_massive_damage
+    base: 3
+  - name: when_take_a_mind_damage
+    base: 2
+
+
+  #== ACTIVATION RESERVATION ==
+  - name: reserve_time
+    params:
+      T:
+        1мг: 1
+        4мг: 2
+        1мин: 3
+        8мин: 4
+        1ч: 5
+        1д: 6
+        1мес: 7
+        4г: 8
+        Много: 9
+        Отдых: 4
+  - name: reserve_action
+    base: 5
+
+  #== EFFECT ASPECTS ==
+  - name: effect_duration
+    params:
+      T:
+        1мг: 1.0
+        4мг: 1.5
+        1мин: 2.0
+        8мин: 2.5
+        1ч: 3.0
+        1д: 3.5
+        1мес: 4.0
+        4г: 4.5
+        Много: 5.0
+        Отдых: 3.0
 
   #== ATTACK EFFECTS ==
   - name: suppress_life instant
@@ -28,7 +132,6 @@ effects:
   - name: stun instant
     base: 8
   - name: damage_health instant
-    base: 0
     params:
       N: N
       M: N
@@ -44,11 +147,11 @@ effects:
       N: N
       M: N
       starts_at:
-      - strong: 0
-      - medium: 2
-      - weak: 4
-      - under: 6
-      - organs: 8
+        strong: 0
+        medium: 2
+        weak: 4
+        under: 6
+        organs: 8
   - name: amplify_damage
     base: 18
     params:

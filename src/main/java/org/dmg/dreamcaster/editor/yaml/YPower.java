@@ -1,4 +1,4 @@
-package org.dmg.dreamcaster.yaml;
+package org.dmg.dreamcaster.editor.yaml;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,8 +11,7 @@ import java.util.Map;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Effect {
-    private String name;
-    private Integer base;
-    private Map<String, Object> params;
+public class YPower {
+    private Map<String, Object> effect;
+    private Map<String, Object> activation;
 }

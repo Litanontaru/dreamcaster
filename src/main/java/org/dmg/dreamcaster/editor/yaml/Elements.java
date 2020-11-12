@@ -1,4 +1,4 @@
-package org.dmg.dreamcaster.yaml;
+package org.dmg.dreamcaster.editor.yaml;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +12,6 @@ import java.util.List;
 @Getter
 @Setter
 public class Elements {
-    private List<Aspect> aspects;
-    private List<Effect> effects;
+    private List<YElement> elements;
+    private List<YAspect> aspects;
 }
