@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @AllArgsConstructor
@@ -15,7 +16,8 @@ public class Power {
     private final Formula formula;
 
     public double multiplier() {
-        return effect.stream().flatMap(Aspect::multiplier).findFirst().orElse(1.0);
+        Optional<Double> first = effect.stream().flatMap(Aspect::multiplier).findFirst();
+        return first.orElse(1.0);
     }
 
     public int rate() {

@@ -15,5 +15,6 @@ public class YElement {
     private String name;
     private Double multiply;
     private Integer base;
-    private Map<String, Number> options;
+    private Map<String, Integer> options;
+    private Map<String, Double> multipliers;
 }

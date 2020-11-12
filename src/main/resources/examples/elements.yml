@@ -16,11 +16,41 @@ elements:
       "3": 3
       "4-6": 2
       "7-12": 1
-  - name: I3
+  - name: 9-I
+    options:
+      1: 8
+      2: 7
+      3: 6
+      4: 5
+      5: 4
+      6: 3
+      7: 2
+      8: 1
+      9: 0
+  - name: I2
+    options:
+      "0-1": 0
+      "2-3": 1
+      "4-5": 2
+      "6-7": 3
+      "8-9": 4
+  - name: I4
     options:
       "0-3": 0
       "4-6": 1
       "7-9": 2
+  - name: effect_duration
+    multipliers:
+      1мг: 1.0
+      4мг: 1.5
+      1мин: 2.0
+      8мин: 2.5
+      1ч: 3.0
+      1д: 3.5
+      1мес: 4.0
+      4г: 4.5
+      Много: 5.0
+      Отдых: 3.0
 
 aspects:
   #== ACTIVATION PAY ==
@@ -81,7 +111,7 @@ aspects:
   #== ACTIVATION TEST ==
   - name: make_test
     params:
-      T: I3
+      T: I4
 
   #== ACTIVATION EVENT ==
   - name: when_take_a_health_damage
@@ -90,7 +120,39 @@ aspects:
     base: 3
   - name: when_take_a_mind_damage
     base: 2
-
+  - name: when_stun
+    base: 1
+  - name: when_take_wear
+    base: 1
+  - name: when_injured
+    base: 3
+  - name: when_temper_activated
+    base: 1
+  - name: when_temper_is_straned
+    base: 4
+  - name: when_get_contused
+    base: 2
+  - name: when_parried_successfully
+    base: 2
+  - name: when_block_successfully
+    base: 2
+  - name: when_make_an_action
+    params:
+      I: 9-I
+  - name: when_become_a_target_of_an_action
+    params:
+      I: 9-I
+  - name: on_combat_start
+    base: 1
+  - name: at_midday
+    base: 1
+  - name: on_downtime_start
+    base: 2
+  - name: when_a_target_failed_a_skill_check
+    base: 1
+  - name: an_event_occures
+    params:
+      I: I2
 
   #== ACTIVATION RESERVATION ==
   - name: reserve_time
@@ -112,17 +174,7 @@ aspects:
   #== EFFECT ASPECTS ==
   - name: effect_duration
     params:
-      T:
-        1мг: 1.0
-        4мг: 1.5
-        1мин: 2.0
-        8мин: 2.5
-        1ч: 3.0
-        1д: 3.5
-        1мес: 4.0
-        4г: 4.5
-        Много: 5.0
-        Отдых: 3.0
+      T: effect_duration
 
   #== ATTACK EFFECTS ==
   - name: suppress_life instant
@@ -136,7 +188,7 @@ aspects:
       N: N
       M: N
   - name: damage_health_by_time
-    base: -4
+    base: 0
     params:
       N: N
       M: N
@@ -157,7 +209,7 @@ aspects:
     params:
       N: N
       M: N
-      I: I3
+      I: I4
   - name: injure instant
     base: 10
     params:

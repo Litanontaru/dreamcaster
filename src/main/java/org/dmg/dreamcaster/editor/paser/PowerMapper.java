@@ -54,7 +54,7 @@ public class PowerMapper {
             Object e = entry.getValue();
             Element element = e instanceof String
                     ? elementMap.get(e)
-                    : Element.of(((Map<String, Number>) e));
+                    : Element.of(((Map<String, Integer>) e));
 
             params.put(entry.getKey(), element.map(values.get(i)));
             multipliers.add(element.multiplier(values.get(i)));
