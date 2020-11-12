@@ -154,8 +154,8 @@ aspects:
     params:
       I: I2
 
-  #== ACTIVATION RESERVATION ==
-  - name: reserve_time
+  #== ACTIVATION TIME ==
+  - name: activation_time
     params:
       T:
         1мг: 1
