@@ -9,6 +9,8 @@ elements:
     multiply: 8
   - name: N10
     multiply: 10
+  - name: N/2
+    multiply: 0.5
   - name: by_time
     options:
       "1": 7
@@ -16,6 +18,17 @@ elements:
       "3": 3
       "4-6": 2
       "7-12": 1
+  - name: 3I/2
+    options:
+      1: 1
+      2: 3
+      3: 4
+      4: 6
+      5: 7
+      6: 9
+      7: 10
+      8: 12
+      9: 13
   - name: 9-I
     options:
       1: 8
@@ -170,6 +183,69 @@ aspects:
         Отдых: 4
   - name: reserve_action
     base: 5
+
+  #== ACTIVATION CONDITION ==
+  - name: have_strong_approach
+    base: 1
+  - name: have_epic_approach
+    base: 3
+  - name: have_a_perk
+    base: 1
+  - name: have_at_least_5_wear
+    base: 1
+  - name: have_at_least_8_wear
+    base: 2
+  - name: have_at_least_10_wear
+    base: 3
+  - name: have_an_injure
+    params:
+      X: N1
+  - name: have_a_temper
+    params:
+      X: N/2
+  - name: have_activated_temper
+    params:
+      X: N1
+  - name: have_karma
+    base: 1
+  - name: have_no_karma
+    base: 1
+  - name: have_at_least_3_coins
+    base: 1
+  - name: have_an_influence
+    params:
+      X: N1
+  - name: use_an_equipment
+    params:
+      X: N/2
+  - name: be_devoted_to_a_fraction
+    base: 2
+  - name: all_have_requital
+    params:
+      X: N1
+  - name: have_an_allied_fraction
+    base: 1
+  - name: have_a_claim
+    base: 2
+  - name: while_a_power_has_an_effect
+    base: 1
+  - name: while_the_target_is_within_range
+    base: 1
+  - name: while_a_morning
+    base: 1
+  - name: while_full_moon
+    base: 3
+  - name: at_year_day
+    base: 4
+  - name: while_full_solar_eclipse
+    base: 5
+  - name: a_common_condition
+    params:
+      I: 3I/2
+  - name: can_be_unconscious
+    base: -2
+  - name: can_be_dead
+    base: -8
 
   #== EFFECT ASPECTS ==
   - name: effect_duration
