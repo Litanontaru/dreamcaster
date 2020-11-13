@@ -17,7 +17,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+@SuppressWarnings("unchecked")
 public class PowerMapper {
+    private static final String RESERVE = "reserve";
+
     private final Map<String, YAspect> aspectMap;
     private final Map<String, Element> elementMap;
 
@@ -39,6 +42,10 @@ public class PowerMapper {
     }
 
     private Aspect map(String key, Object value) {
+        if (key.equals(RESERVE)) {
+            return mapReserve(value);
+        }
+
         YAspect y = aspectMap.get(key);
         Integer base = y.getBase() == null ? 0 : y.getBase();
         if (value == null) {
@@ -62,5 +69,15 @@ public class PowerMapper {
 
         Double multiplier = multipliers.stream().filter(Objects::nonNull).findFirst().orElse(null);
         return new Aspect(y.getName(), base, params, multiplier);
+    }
+
+    private Aspect mapReserve(Object value) {
+        int sum = ((Map<String, Object>) value)
+                .entrySet()
+                .stream()
+                .map(e -> map(e.getKey(), e.getValue()))
+                .mapToInt(Aspect::rate)
+                .sum();
+        return new Aspect(RESERVE, sum / 4, emptyMap(), null);
     }
 }

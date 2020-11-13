@@ -16,8 +16,7 @@ public class Power {
     private final Formula formula;
 
     public double multiplier() {
-        Optional<Double> first = effect.stream().flatMap(Aspect::multiplier).findFirst();
-        return first.orElse(1.0);
+        return effect.stream().flatMap(Aspect::multiplier).findFirst().orElse(1.0);
     }
 
     public int rate() {

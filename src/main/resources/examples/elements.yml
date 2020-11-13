@@ -247,6 +247,9 @@ aspects:
   - name: can_be_dead
     base: -8
 
+  #== ACTIVATION RESERVATION ==
+
+
   #== EFFECT ASPECTS ==
   - name: effect_duration
     params:

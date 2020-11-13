@@ -4,7 +4,8 @@ powers:
     activation:
       activation_time: 1мг
       reserve_action:
-      pay_wear: 1
+      reserve:
+        pay_wear: 6
   - effect:
       damage_health_by_time: [4, 0, 3]
       effect_duration: 1мин
