@@ -7,8 +7,13 @@ powers:
       reserve:
         pay_wear: 6
   - effect:
-      damage_health_by_time: [4, 0, 3]
+      damage_health_by_time: [6, 0, 3]
       effect_duration: 1мин
+      minus:
+        threat:
+          armor_threat:
+          opposite_nature_threat:
+          factor: 0.5
     activation:
       activation_time: 1мг
       reserve_action:
