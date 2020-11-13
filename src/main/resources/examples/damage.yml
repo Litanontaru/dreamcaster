@@ -1,0 +1,84 @@
+#== ATTACK EFFECTS ==
+aspects:
+  - name: suppress_life instant
+    base: 6
+    params:
+      N: N
+  - name: stun instant
+    base: 8
+  - name: damage_health instant
+    params:
+      N: N
+      M: N
+  - name: damage_health_by_time
+    base: 0
+    params:
+      N: N
+      M: N
+      T: by_time
+  - name: set_afire
+    base: 4
+    params:
+      N: N
+      M: N
+      starts_at:
+        strong: 0
+        medium: 2
+        weak: 4
+        under: 6
+        organs: 8
+  - name: amplify_damage
+    base: 18
+    params:
+      N: N
+      M: N
+      I: I4
+  - name: injure instant
+    base: 10
+    params:
+      N: N3
+  - name: contuse instant
+    base: 10
+  - name: kill instant
+    base: 20
+  - name: infect instant
+    base: 10
+    params:
+      N: N4
+  - name: entangle_disease
+    base: 4
+    params:
+      N: N
+  - name: damage_mind instant
+    base: 0
+    params:
+      N: N
+      M: N
+  - name: damage_mind_by_time
+    base: 0
+    params:
+      N: N
+      M: N
+      T: by_time
+  - name: activate_temper instant
+    base: 5
+  - name: strain_temper instant
+    base: 13
+  - name: swith_off_mind instant
+    base: 10
+  - name: drive_insane instant
+    base: 20
+  - name: terror
+    base: 5
+    params:
+      N: N
+  - name: fragility
+    base: 2
+    params:
+      N: N
+  - name: armor_fragility
+    base: 2
+    params:
+      N: N3
+  - name: banish
+    base: 8

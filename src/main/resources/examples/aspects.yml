@@ -1,0 +1,227 @@
+aspects:
+  #== ACTIVATION PAY ==
+  - name: pay_wear
+    params:
+      X: N
+  - name: pay_contuse
+    base: 6
+  - name: pay_injure
+    params:
+      X: N4
+  - name: pay_traumatize_mind
+    params:
+      X: N4
+  - name: pay_one_personality
+    base: 4
+  - name: pay_burn_one_personality
+    base: 16
+  - name: pay_4_experience_points
+    base: 8
+  - name: pay_get_hindrance
+    base: 8
+  - name: pay_get_disorder
+    params:
+      X: N6
+  - name: pay_get_karma
+    params:
+      X: N4
+  - name: pay_crew_karma
+    params:
+      X: N3
+  - name: pay_reputation
+    params:
+      X: N3
+  - name: pay_hoard
+    params:
+      X: N3
+  - name: pay_purchase
+    params:
+      X: N
+  - name: pay_corruption
+    params:
+      X: N10
+  - name: pay_activity
+    base: 5
+    params:
+      X: N
+  - name: pay_personal_project
+    base: 5
+    params:
+      X: N1
+  - name: pay_fraction_relationship
+    params:
+      X: N
+  - name: pay_reduce_hold
+    base: 12
+
+  #== ACTIVATION TEST ==
+  - name: make_test
+    params:
+      T: I4
+
+  #== ACTIVATION EVENT ==
+  - name: when_take_a_health_damage
+    base: 2
+  - name: when_take_a_massive_damage
+    base: 3
+  - name: when_take_a_mind_damage
+    base: 2
+  - name: when_stun
+    base: 1
+  - name: when_take_wear
+    base: 1
+  - name: when_injured
+    base: 3
+  - name: when_temper_activated
+    base: 1
+  - name: when_temper_is_straned
+    base: 4
+  - name: when_get_contused
+    base: 2
+  - name: when_parried_successfully
+    base: 2
+  - name: when_block_successfully
+    base: 2
+  - name: when_make_an_action
+    params:
+      I: 9-I
+  - name: when_become_a_target_of_an_action
+    params:
+      I: 9-I
+  - name: on_combat_start
+    base: 1
+  - name: at_midday
+    base: 1
+  - name: on_downtime_start
+    base: 2
+  - name: when_a_target_failed_a_skill_check
+    base: 1
+  - name: an_event_occures
+    params:
+      I: I2
+
+  #== ACTIVATION TIME ==
+  - name: activation_time
+    params:
+      T:
+        1мг: 1
+        4мг: 2
+        1мин: 3
+        8мин: 4
+        1ч: 5
+        1д: 6
+        1мес: 7
+        4г: 8
+        Много: 9
+        Отдых: 4
+
+  #== ACTIVATION CONDITION ==
+  - name: have_strong_approach
+    base: 1
+  - name: have_epic_approach
+    base: 3
+  - name: have_a_perk
+    base: 1
+  - name: have_at_least_5_wear
+    base: 1
+  - name: have_at_least_8_wear
+    base: 2
+  - name: have_at_least_10_wear
+    base: 3
+  - name: have_an_injure
+    params:
+      X: N1
+  - name: have_a_temper
+    params:
+      X: N/2
+  - name: have_activated_temper
+    params:
+      X: N1
+  - name: have_karma
+    base: 1
+  - name: have_no_karma
+    base: 1
+  - name: have_at_least_3_coins
+    base: 1
+  - name: have_an_influence
+    params:
+      X: N1
+  - name: use_an_equipment
+    params:
+      X: N/2
+  - name: be_devoted_to_a_fraction
+    base: 2
+  - name: all_have_requital
+    params:
+      X: N1
+  - name: have_an_allied_fraction
+    base: 1
+  - name: have_a_claim
+    base: 2
+  - name: while_a_power_has_an_effect
+    base: 1
+  - name: while_the_target_is_within_range
+    base: 1
+  - name: while_a_morning
+    base: 1
+  - name: while_full_moon
+    base: 3
+  - name: at_year_day
+    base: 4
+  - name: while_full_solar_eclipse
+    base: 5
+  - name: a_common_condition
+    params:
+      I: 3I/2
+  - name: can_be_unconscious
+    base: -2
+  - name: can_be_dead
+    base: -8
+
+  #== ACTIVATION RESERVATION ==
+  - name: reserve_approach
+    base: 1
+  - name: reserve_less_skills
+    base: 1
+  - name: reserve_more_skills
+    base: 2
+  - name: reserve_influence
+    base: 1
+  - name: reserve_concentration
+    base: 2
+  - name: reserve_less_support
+    base: 1
+  - name: reserve_more_support
+    base: 3
+  - name: reserve_action
+    base: 5
+  - name: reserve_small_action
+    base: 4
+  - name: reserved_action_speed
+    params:
+      S:
+        very_slow: 1
+        very_fast: -1
+
+  #== THREATS ==
+  - name: armor_threat
+    base: 7
+  - name: dodge_threat
+    base: 4
+  - name: mental_block_threat
+    base: 4
+  - name: invasion_resistance_threat
+    base: 7
+  - name: antimagic_threat
+    base: 5
+  - name: poison_resistance_threat
+    base: 5
+  - name: electricity_resistance_threat
+    base: 5
+  - name: opposite_nature_threat
+    base: 3
+
+  #== EFFECT ASPECTS ==
+  - name: effect_duration
+    params:
+      T: effect_duration
