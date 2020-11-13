@@ -11,6 +11,7 @@ import java.util.Optional;
 public class Power {
     public static Formula SIMPLE = (e, p, m) -> (int) (e * m - p);
 
+    private final String name;
     private final List<Aspect> effect;
     private final List<Aspect> payment;
     private final Formula formula;

@@ -25,7 +25,7 @@ public class Main {
         PowerMapper mapper = new PowerMapper(elements);
 
         for (Power power : mapper.map(powers.getPowers())) {
-            System.out.println(power.rate());
+            System.out.println(power.getName() + ": \t" + power.rate());
         }
 
         System.out.println();

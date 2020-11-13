@@ -1,12 +1,19 @@
 powers:
-  - effect:
-      damage_health: [4, 2]
+  - name: magic bolt
+    effect:
+      damage_health: [7, 2]
+      minus:
+        threat:
+          armor_threat:
     activation:
       activation_time: 1мг
-      reserve_action:
-      reserve:
-        pay_wear: 6
-  - effect:
+      reserve_small_action:
+      reserved_action_speed: very_slow
+      threat:
+        antimagic_threat:
+
+  - name: magic_greedy_fire
+    effect:
       damage_health_by_time: [6, 0, 3]
       effect_duration: 1мин
       minus:

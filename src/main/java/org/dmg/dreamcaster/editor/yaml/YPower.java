@@ -12,6 +12,7 @@ import java.util.Map;
 @Getter
 @Setter
 public class YPower {
+    private String name;
     private Map<String, Object> effect;
     private Map<String, Object> activation;
 }

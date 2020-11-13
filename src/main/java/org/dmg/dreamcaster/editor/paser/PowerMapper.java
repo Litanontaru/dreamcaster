@@ -38,6 +38,7 @@ public class PowerMapper {
 
     private Power map(YPower power) {
         return new Power(
+                power.getName(),
                 power.getEffect().entrySet().stream().map(e -> map(e.getKey(), e.getValue())).collect(toList()),
                 power.getActivation().entrySet().stream().map(e -> map(e.getKey(), e.getValue())).collect(toList()),
                 Power.SIMPLE
