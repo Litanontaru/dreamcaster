@@ -270,6 +270,24 @@ aspects:
         very_slow: 1
         very_fast: -1
 
+  #== THREATS ==
+  - name: armor_threat
+    base: 7
+  - name: dodge_threat
+    base: 4
+  - name: mental_block_threat
+    base: 4
+  - name: invasion_resistance_threat
+    base: 7
+  - name: antimagic_threat
+    base: 5
+  - name: poison_resistance_threat
+    base: 5
+  - name: electricity_resistance_threat
+    base: 5
+  - name: opposite_nature_threat
+    base: 3
+
   #== EFFECT ASPECTS ==
   - name: effect_duration
     params:

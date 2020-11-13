@@ -20,11 +20,13 @@ import java.util.Objects;
 @SuppressWarnings("unchecked")
 public class PowerMapper {
     private static final String RESERVE = "reserve";
+    private static final String THREAT = "threat";
+    private static final String FACTOR = "factor";
 
     private final Map<String, YAspect> aspectMap;
     private final Map<String, Element> elementMap;
 
-    public PowerMapper(Elements elements) {
+    PowerMapper(Elements elements) {
         aspectMap = elements.getAspects().stream().collect(toMap(YAspect::getKey, identity()));
         elementMap = elements.getElements().stream().collect(toMap(YElement::getName, Element::of));
     }
@@ -44,6 +46,8 @@ public class PowerMapper {
     private Aspect map(String key, Object value) {
         if (key.equals(RESERVE)) {
             return mapReserve(value);
+        } else if (key.equals(THREAT)) {
+            return mapThreat(value);
         }
 
         YAspect y = aspectMap.get(key);
@@ -79,5 +83,23 @@ public class PowerMapper {
                 .mapToInt(Aspect::rate)
                 .sum();
         return new Aspect(RESERVE, sum / 4, emptyMap(), null);
+    }
+
+    private Aspect mapThreat(Object value) {
+        Map<String, Object> map = (Map<String, Object>) value;
+        List<Integer> rates = map
+                .entrySet()
+                .stream()
+                .filter(e -> !e.getKey().equals(FACTOR))
+                .map(e -> map(e.getKey(), e.getValue()))
+                .map(Aspect::rate)
+                .collect(toList());
+        Double factor = (Double) map.getOrDefault(FACTOR, 1.0);
+
+        int sum = rates.stream().mapToInt(i -> i).sum();
+        int max = rates.stream().mapToInt(i -> i).max().orElse(0);
+        int rate = (int) ((sum - max) * factor + max);
+
+        return new Aspect(THREAT, rate, emptyMap(), null);
     }
 }
