@@ -181,8 +181,6 @@ aspects:
         4г: 8
         Много: 9
         Отдых: 4
-  - name: reserve_action
-    base: 5
 
   #== ACTIVATION CONDITION ==
   - name: have_strong_approach
@@ -248,7 +246,29 @@ aspects:
     base: -8
 
   #== ACTIVATION RESERVATION ==
-
+  - name: reserve_approach
+    base: 1
+  - name: reserve_less_skills
+    base: 1
+  - name: reserve_more_skills
+    base: 2
+  - name: reserve_influence
+    base: 1
+  - name: reserve_concentration
+    base: 2
+  - name: reserve_less_support
+    base: 1
+  - name: reserve_more_support
+    base: 3
+  - name: reserve_action
+    base: 5
+  - name: reserve_small_action
+    base: 4
+  - name: reserved_action_speed
+    params:
+      S:
+        very_slow: 1
+        very_fast: -1
 
   #== EFFECT ASPECTS ==
   - name: effect_duration
