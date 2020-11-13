@@ -19,6 +19,7 @@ import java.util.Objects;
 
 @SuppressWarnings("unchecked")
 public class PowerMapper {
+    private static final String MINUS = "minus";
     private static final String RESERVE = "reserve";
     private static final String THREAT = "threat";
     private static final String FACTOR = "factor";
@@ -44,6 +45,9 @@ public class PowerMapper {
     }
 
     private Aspect map(String key, Object value) {
+        if (key.equals(MINUS)) {
+            return mapMinus(value);
+        }
         if (key.equals(RESERVE)) {
             return mapReserve(value);
         } else if (key.equals(THREAT)) {
@@ -73,6 +77,16 @@ public class PowerMapper {
 
         Double multiplier = multipliers.stream().filter(Objects::nonNull).findFirst().orElse(null);
         return new Aspect(y.getName(), base, params, multiplier);
+    }
+
+    private Aspect mapMinus(Object value) {
+        int sum = ((Map<String, Object>) value)
+                .entrySet()
+                .stream()
+                .map(e -> map(e.getKey(), e.getValue()))
+                .mapToInt(Aspect::rate)
+                .sum();
+        return new Aspect(MINUS, -sum, emptyMap(), null);
     }
 
     private Aspect mapReserve(Object value) {
